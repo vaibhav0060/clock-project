@@ -8,6 +8,9 @@ let clock = setInterval(function timeUpdate() {
   let minutes = date.getMinutes();
   seconds = date.getSeconds();
   let am_pm = document.getElementById("am_pm");
+  // hr = hours<10 ? "0" + hours : hours;
+  // min = minutes<10 ? "0" + minutes : minutes;
+  //   sec = seconds<10 ? "0" + seconds : seconds;
   if (hours >= 12) {
     am_pm.innerHTML = "PM";
   } else {
@@ -20,9 +23,9 @@ let clock = setInterval(function timeUpdate() {
     hours = hours - 12;
   }
 
-  hr.textContent = hours;
-  min.textContent = minutes;
-  sec.textContent = seconds;
+  hr.textContent = hours<10 ? "0" + hours : hours;
+  min.textContent = minutes<10 ? "0" + minutes : minutes;
+  sec.textContent = seconds<10 ? "0" + seconds : seconds;
 }, 1000);
 
 // pic change
@@ -154,7 +157,7 @@ selecto.addEventListener("change", function () {
     lunchtext1.innerText = "LET'S WAKE UP!!";
     wish.classList.remove("newclass");
     wish.innerText = "HAVE A GOOD DAY!!";
-    wish.innerText = "HAVE A GOOD DAY!!";
+    // wish.innerText = "HAVE A GOOD DAY!!";
     pic.style.backgroundImage = " url('3.png')";
   } else if (selecto.value == "TWELL" && hours >= 11 && hours < 12) {
     wish.classList.add("wish");
@@ -636,9 +639,14 @@ let party = document.querySelector("#btn");
 party.addEventListener("click", () => {
   if (isparty) {
     party.innerHTML = " Party time! ";
+    wish.classList.remove("wish");
+    wish.classList.add("newclass");
     
     defaultt();
   } else {
+    wish.classList.add("wish");
+    wish.classList.remove("newclass");
+    wish.innerText = "ENJOY PARTY!!";
     party.innerHTML = "End Party ! ";
     lunchtext1.innerText = "LET'S PARTY !!!";
     pic.style.backgroundImage = " url('./images/party2.svg')";
